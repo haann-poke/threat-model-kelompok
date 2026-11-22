@@ -35,8 +35,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89",
             "zIndex": -1,
+            "id": "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona publik (internet)",
@@ -75,8 +75,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
             "zIndex": -1,
+            "id": "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona aplikasi",
@@ -117,8 +117,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "6dd49966-755d-40bd-88f4-c219d4667004",
             "zIndex": -1,
+            "id": "6dd49966-755d-40bd-88f4-c219d4667004",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona penyimpanan",
@@ -158,6 +158,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -241,7 +242,6 @@
               ]
             },
             "id": "6888a6ff-b7d1-465c-8c69-15f0626eecd4",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "Pemilik dokumen",
@@ -275,6 +275,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -358,7 +359,6 @@
               ]
             },
             "id": "40be50ae-0682-4fb3-b6c1-1f415d674b56",
-            "zIndex": 2,
             "data": {
               "type": "tm.Actor",
               "name": "Penerima eksternal\n(tanpa login)",
@@ -410,6 +410,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -493,7 +494,6 @@
               ]
             },
             "id": "6b60239a-acb1-434d-9841-7bd1990ccf1b",
-            "zIndex": 3,
             "data": {
               "type": "tm.Actor",
               "name": "Admin organisasi",
@@ -527,6 +527,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -610,7 +611,6 @@
               ]
             },
             "id": "6a2190d5-e8be-40af-b1b6-b9a342ddee5d",
-            "zIndex": 4,
             "data": {
               "type": "tm.Process",
               "name": "Backend Dokumen",
@@ -700,6 +700,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -783,7 +784,6 @@
               ]
             },
             "id": "5c3f6620-ff3d-4132-986c-bf438dd0e4b0",
-            "zIndex": 5,
             "data": {
               "type": "tm.Store",
               "name": "Database Metadata",
@@ -846,6 +846,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 6,
             "ports": {
               "groups": {
                 "top": {
@@ -929,7 +930,6 @@
               ]
             },
             "id": "e5cbd641-c39f-4233-8e14-0b725d27b7f7",
-            "zIndex": 6,
             "data": {
               "type": "tm.Store",
               "name": "Object Storage",
@@ -1039,14 +1039,14 @@
             "attrs": {
               "line": {
                 "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
                 "sourceMarker": {
                   "name": ""
                 },
-                "strokeDasharray": null,
-                "strokeWidth": 2.5
+                "strokeDasharray": null
               }
             },
             "width": 200,
@@ -1136,8 +1136,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
-                "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89"
+                "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89",
+                "cfd13991-e66f-4a55-99ff-7ecd0e62d171"
               ]
             },
             "labels": [
@@ -1246,8 +1246,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
-                "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89"
+                "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89",
+                "cfd13991-e66f-4a55-99ff-7ecd0e62d171"
               ]
             },
             "labels": [
@@ -1356,8 +1356,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
-                "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89"
+                "9c260ef0-b5a5-4ffa-ac9b-02b4c17dbd89",
+                "cfd13991-e66f-4a55-99ff-7ecd0e62d171"
               ]
             },
             "labels": [
@@ -1466,8 +1466,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "6dd49966-755d-40bd-88f4-c219d4667004",
-                "cfd13991-e66f-4a55-99ff-7ecd0e62d171"
+                "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
+                "6dd49966-755d-40bd-88f4-c219d4667004"
               ]
             },
             "labels": [
@@ -1576,8 +1576,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "6dd49966-755d-40bd-88f4-c219d4667004",
-                "cfd13991-e66f-4a55-99ff-7ecd0e62d171"
+                "cfd13991-e66f-4a55-99ff-7ecd0e62d171",
+                "6dd49966-755d-40bd-88f4-c219d4667004"
               ]
             },
             "labels": [
