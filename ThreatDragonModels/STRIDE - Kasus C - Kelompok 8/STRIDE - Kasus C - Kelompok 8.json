@@ -35,8 +35,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "6f057d11-b327-4d53-b729-8180c4f3cf6d",
             "zIndex": -1,
+            "id": "6f057d11-b327-4d53-b729-8180c4f3cf6d",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona publik",
@@ -69,8 +69,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "fb201bab-05a8-4dc0-9f9a-89eef79b877d",
             "zIndex": -1,
+            "id": "fb201bab-05a8-4dc0-9f9a-89eef79b877d",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona petugas di lokasi",
@@ -103,8 +103,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "980426c6-0e33-4fc6-ad68-65932118df82",
             "zIndex": -1,
+            "id": "980426c6-0e33-4fc6-ad68-65932118df82",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona admin",
@@ -136,8 +136,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "8cc35803-a7e9-44eb-8f66-f01502323c4a",
             "zIndex": -1,
+            "id": "8cc35803-a7e9-44eb-8f66-f01502323c4a",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona backend",
@@ -175,8 +175,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "3410a5b4-42c9-4e79-bdf1-ce4732db90b8",
             "zIndex": -1,
+            "id": "3410a5b4-42c9-4e79-bdf1-ce4732db90b8",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona data",
@@ -213,6 +213,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -296,7 +297,6 @@
               ]
             },
             "id": "c2a2cb89-c6a1-4c52-a38e-c0b84ae100e6",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "Peserta",
@@ -313,7 +313,7 @@
                   "status": "Open",
                   "severity": "High",
                   "type": "Spoofing",
-                  "description": "Jika peserta membagikan atau kehilangan tangkapan layar QR, maka orang lain dapat masuk lebih dulu dengan QR yang sama dan pemilik sah ditolak karena tiket sudah check-in. Kondisi: QR statis berisi ID tiket (Asumsi 2). Dampak: orang tidak berhak masuk, peserta sah dirugikan. Kemungkinan 3 x Dampak 2 = 6 (Tinggi).",
+                  "description": "Jika peserta membagikan atau kehilangan tangkapan layar QR tiketnya, maka orang lain dapat masuk lebih dulu menggunakan QR yang sama dan pemilik sah ditolak karena tiket sudah berstatus check-in. Kondisi: QR statis hanya berisi ID tiket tanpa tanda tangan (Asumsi 2). Dampak: orang yang tidak berhak dapat masuk acara dan peserta sah dirugikan. Kemungkinan 3 x Dampak 2 = 6 (Tinggi).",
                   "mitigation": "ID tiket acak yang tidak dapat ditebak; hasil validasi menampilkan nama peserta untuk dicocokkan dengan identitas bila perlu; opsi QR dinamis di portal yang diperbarui berkala pada hari acara; prosedur penanganan sengketa berbasis log.",
                   "modelType": "STRIDE",
                   "new": false,
@@ -322,7 +322,7 @@
                 }
               ],
               "threatFrequency": {
-                "spoofing": 1,
+                "spoofing": 2,
                 "repudiation": 0
               }
             }
@@ -348,6 +348,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -431,7 +432,6 @@
               ]
             },
             "id": "6e73c38b-70f9-4e0c-adaf-83c30f452646",
-            "zIndex": 2,
             "data": {
               "type": "tm.Process",
               "name": "Portal Web (publik)",
@@ -451,7 +451,7 @@
                   "status": "Open",
                   "severity": "Medium",
                   "type": "Information disclosure",
-                  "description": "Jika halaman tiket di portal diakses dengan ID tiket pada URL tanpa memeriksa pemiliknya, maka pengunjung dapat mengganti ID dan melihat tiket serta identitas peserta lain, lalu memakai QR tersebut. Dampak: kebocoran data pribadi, tiket dapat dicuri. Kemungkinan 2 x Dampak 2 = 4 (Sedang).",
+                  "description": "Jika halaman tiket di portal dapat diakses menggunakan ID tiket pada URL tanpa memverifikasi kepemilikannya, maka pengunjung dapat mengganti parameter ID dan melihat tiket serta identitas peserta lain, lalu memakai QR tersebut. Dampak: kebocoran data pribadi peserta dan pencurian tiket. Kemungkinan 2 x Dampak 2 = 4 (Sedang).",
                   "mitigation": "Tampilan tiket hanya untuk peserta yang terautentikasi/terverifikasi sebagai pemilik; ID tiket acak; respons Aplikasi Pemindai hanya berisi data minimum yang dibutuhkan petugas.",
                   "modelType": "STRIDE",
                   "new": false,
@@ -476,10 +476,17 @@
                 "spoofing": 0,
                 "tampering": 0,
                 "repudiation": 0,
-                "informationDisclosure": 1,
+                "informationDisclosure": 2,
                 "denialOfService": 1,
                 "elevationOfPrivilege": 0
               }
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -503,6 +510,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -586,7 +594,6 @@
               ]
             },
             "id": "6fa42261-757d-4d5a-a6bd-4be66cec3949",
-            "zIndex": 3,
             "data": {
               "type": "tm.Actor",
               "name": "Petugas pintu",
@@ -638,6 +645,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -721,7 +729,6 @@
               ]
             },
             "id": "6f3e3e08-1c9e-4b66-abfc-2e14f0f07b33",
-            "zIndex": 4,
             "data": {
               "type": "tm.Process",
               "name": "Aplikasi Pemindai",
@@ -758,6 +765,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -841,7 +849,6 @@
               ]
             },
             "id": "70e78757-7fc9-4b16-ac49-128b0be13e4b",
-            "zIndex": 5,
             "data": {
               "type": "tm.Actor",
               "name": "Admin acara",
@@ -875,6 +882,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 6,
             "ports": {
               "groups": {
                 "top": {
@@ -958,7 +966,6 @@
               ]
             },
             "id": "41a6b252-c300-4726-b632-ced0770fa09c",
-            "zIndex": 6,
             "data": {
               "type": "tm.Process",
               "name": "Backend Tiket",
@@ -1035,6 +1042,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 7,
             "ports": {
               "groups": {
                 "top": {
@@ -1118,7 +1126,6 @@
               ]
             },
             "id": "1e83c4ba-c2b5-443d-af28-6a9fb00e80ad",
-            "zIndex": 7,
             "data": {
               "type": "tm.Store",
               "name": "Database Tiket",
@@ -1346,8 +1353,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "8cc35803-a7e9-44eb-8f66-f01502323c4a",
-                "6f057d11-b327-4d53-b729-8180c4f3cf6d"
+                "6f057d11-b327-4d53-b729-8180c4f3cf6d",
+                "8cc35803-a7e9-44eb-8f66-f01502323c4a"
               ]
             },
             "labels": [
@@ -1421,14 +1428,14 @@
             "attrs": {
               "line": {
                 "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
                 "sourceMarker": {
                   "name": ""
                 },
-                "strokeDasharray": null,
-                "strokeWidth": 2.5
+                "strokeDasharray": null
               }
             },
             "width": 200,
@@ -1523,8 +1530,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "8cc35803-a7e9-44eb-8f66-f01502323c4a",
-                "fb201bab-05a8-4dc0-9f9a-89eef79b877d"
+                "fb201bab-05a8-4dc0-9f9a-89eef79b877d",
+                "8cc35803-a7e9-44eb-8f66-f01502323c4a"
               ]
             },
             "labels": [
@@ -1633,8 +1640,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "8cc35803-a7e9-44eb-8f66-f01502323c4a",
-                "980426c6-0e33-4fc6-ad68-65932118df82"
+                "980426c6-0e33-4fc6-ad68-65932118df82",
+                "8cc35803-a7e9-44eb-8f66-f01502323c4a"
               ]
             },
             "labels": [
@@ -1743,8 +1750,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "3410a5b4-42c9-4e79-bdf1-ce4732db90b8",
-                "8cc35803-a7e9-44eb-8f66-f01502323c4a"
+                "8cc35803-a7e9-44eb-8f66-f01502323c4a",
+                "3410a5b4-42c9-4e79-bdf1-ce4732db90b8"
               ]
             },
             "labels": [
