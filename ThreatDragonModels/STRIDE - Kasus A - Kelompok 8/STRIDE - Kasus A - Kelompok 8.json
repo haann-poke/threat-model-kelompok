@@ -35,8 +35,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "adf09cd3-8890-486e-ad1f-03ca9939f5fb",
             "zIndex": -1,
+            "id": "adf09cd3-8890-486e-ad1f-03ca9939f5fb",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Perangkat pengguna (publik)",
@@ -74,8 +74,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
             "zIndex": -1,
+            "id": "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Layanan kampus",
@@ -115,8 +115,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "30fedf5d-d41a-4363-90e2-c0d44557a0d5",
             "zIndex": -1,
+            "id": "30fedf5d-d41a-4363-90e2-c0d44557a0d5",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Layanan autentikasi kampus",
@@ -148,8 +148,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "1d654964-4807-4a32-bc92-b3c8a58b2e18",
             "zIndex": -1,
+            "id": "1d654964-4807-4a32-bc92-b3c8a58b2e18",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Zona data",
@@ -186,6 +186,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -269,7 +270,6 @@
               ]
             },
             "id": "193f1fb4-e8e4-4acc-b6a9-a2329bf2711e",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "Mahasiswa",
@@ -286,8 +286,8 @@
                   "status": "Open",
                   "severity": "Medium",
                   "type": "Spoofing",
-                  "description": "Jika backend menerima token tanpa memeriksa tanda tangan, issuer, audience, dan masa berlaku, maka penyerang dapat memakai token palsu atau kedaluwarsa untuk menyamar sebagai mahasiswa/dosen. Kondisi: login via SSO kampus (Asumsi 2). Dampak: akses tidak sah. Kemungkinan 1 x Dampak 3 = 3 (Sedang).",
-                  "mitigation": "Verifikasi token sesuai standar SSO (tanda tangan, issuer, audience, exp) melalui layanan autentikasi; masa berlaku token singkat; tolak token dari aplikasi lain.",
+                  "description": "Jika backend menerima token tanpa memeriksa tanda tangan digital, issuer, audience, dan masa berlaku secara ketat, maka penyerang dapat memakai token palsu atau kedaluwarsa untuk menyamar sebagai mahasiswa/dosen yang sah. Kondisi: login via SSO kampus berbasis token (Asumsi 2). Dampak: akses tidak sah ke fitur presensi dan manipulasi identitas pengguna. Kemungkinan 1 x Dampak 3 = 3 (Sedang).",
+                  "mitigation": "Verifikasi token sesuai standar SSO (tanda tangan kriptografi, issuer, audience, dan waktu kedaluwarsa/exp) melalui layanan autentikasi kampus pada setiap permintaan; terapkan masa berlaku token yang singkat; tolak token yang berasal dari aplikasi lain.",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 7,
@@ -295,9 +295,18 @@
                 }
               ],
               "threatFrequency": {
-                "spoofing": 1,
+                "spoofing": 4,
                 "repudiation": 0
               }
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -321,6 +330,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -404,7 +414,6 @@
               ]
             },
             "id": "d1eae7d6-b057-44e8-9513-94c943cdf27f",
-            "zIndex": 2,
             "data": {
               "type": "tm.Actor",
               "name": "Dosen pengampu",
@@ -438,6 +447,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -521,7 +531,6 @@
               ]
             },
             "id": "b242abf1-6ff9-48c2-bc81-4a0e86ccb307",
-            "zIndex": 3,
             "data": {
               "type": "tm.Actor",
               "name": "Admin akademik",
@@ -555,6 +564,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -638,7 +648,6 @@
               ]
             },
             "id": "9fbd7b25-90c3-4e52-895b-e857bad91f48",
-            "zIndex": 4,
             "data": {
               "type": "tm.Process",
               "name": "Backend Presensi",
@@ -749,6 +758,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -832,7 +842,6 @@
               ]
             },
             "id": "66b2a74e-9151-4b49-9c98-8712c858f75d",
-            "zIndex": 5,
             "data": {
               "type": "tm.Actor",
               "name": "Layanan Autentikasi\nKampus",
@@ -871,6 +880,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 6,
             "ports": {
               "groups": {
                 "top": {
@@ -954,7 +964,6 @@
               ]
             },
             "id": "23c1910f-c5cc-48a5-9c59-2e5fa946c584",
-            "zIndex": 6,
             "data": {
               "type": "tm.Store",
               "name": "Database Akademik",
@@ -996,14 +1005,14 @@
             "attrs": {
               "line": {
                 "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
                 "sourceMarker": {
                   "name": ""
                 },
-                "strokeDasharray": null,
-                "strokeWidth": 2.5
+                "strokeDasharray": null
               }
             },
             "width": 200,
@@ -1098,8 +1107,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
-                "adf09cd3-8890-486e-ad1f-03ca9939f5fb"
+                "adf09cd3-8890-486e-ad1f-03ca9939f5fb",
+                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b"
               ]
             },
             "labels": [
@@ -1208,8 +1217,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
-                "adf09cd3-8890-486e-ad1f-03ca9939f5fb"
+                "adf09cd3-8890-486e-ad1f-03ca9939f5fb",
+                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b"
               ]
             },
             "labels": [
@@ -1318,8 +1327,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
-                "adf09cd3-8890-486e-ad1f-03ca9939f5fb"
+                "adf09cd3-8890-486e-ad1f-03ca9939f5fb",
+                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b"
               ]
             },
             "labels": [
@@ -1428,8 +1437,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "30fedf5d-d41a-4363-90e2-c0d44557a0d5",
-                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b"
+                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
+                "30fedf5d-d41a-4363-90e2-c0d44557a0d5"
               ]
             },
             "labels": [
@@ -1538,8 +1547,8 @@
               "protocol": "HTTPS",
               "threats": [],
               "trustBoundaryIds": [
-                "1d654964-4807-4a32-bc92-b3c8a58b2e18",
-                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b"
+                "9dfe2c8d-3cc1-4d6b-88a4-30526b634a0b",
+                "1d654964-4807-4a32-bc92-b3c8a58b2e18"
               ]
             },
             "labels": [
